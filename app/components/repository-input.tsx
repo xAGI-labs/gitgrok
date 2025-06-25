@@ -4,6 +4,14 @@ import { useState } from 'react';
 import { GitHubIcon, GitLabIcon, ProcessingIcon } from './icons';
 import { AdvancedOptions } from './advanced-options';
 import { ResultDisplay } from './result-display';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../../components/ui/dialog";
 
 interface ProcessOptions {
   includeTests: boolean;
@@ -30,7 +38,6 @@ export function RepositoryInput() {
   const [url, setUrl] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState('');
-  const [showAdvanced, setShowAdvanced] = useState(false);
   const [result, setResult] = useState<ProcessResult | null>(null);
   
   const [options, setOptions] = useState<ProcessOptions>({
@@ -138,15 +145,27 @@ export function RepositoryInput() {
                 )}
               </button>
               
-              <button
-                type="button"
-                onClick={() => setShowAdvanced(!showAdvanced)}
-                className={`px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base border border-border text-foreground rounded-lg font-medium hover:bg-accent hover:text-accent-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors ${
-                  showAdvanced ? 'bg-accent text-accent-foreground' : ''
-                }`}
-              >
-                Advanced Options
-              </button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button
+                    type="button"
+                    className="px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base border border-border text-foreground rounded-lg font-medium hover:bg-accent hover:text-accent-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors"
+                  >
+                    Advanced Options
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[600px] max-h-[80vh] flex flex-col">
+                  <DialogHeader className="flex-shrink-0">
+                    <DialogTitle>Advanced Options</DialogTitle>
+                    <DialogDescription>
+                      Configure advanced settings for repository processing.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex-1 overflow-y-auto pr-2 -mr-2">
+                    <AdvancedOptions options={options} onChange={setOptions} />
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </form>
         </div>
@@ -193,10 +212,6 @@ export function RepositoryInput() {
           </div>
         </div>
 
-        {/* Advanced Options */}
-        {showAdvanced && (
-          <AdvancedOptions options={options} onChange={setOptions} />
-        )}
       </div>
 
       {/* Results */}

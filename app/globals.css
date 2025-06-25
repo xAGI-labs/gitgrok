@@ -169,4 +169,34 @@
     animation: wave-colors 4s ease-in-out infinite;
     animation-delay: 1s;
   }
+
+  /* Custom slider styles */
+  .slider::-webkit-slider-thumb {
+    appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: oklch(0.65 0.18 280);
+    cursor: pointer;
+    border: 2px solid oklch(0.98 0.01 280);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .slider::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: oklch(0.65 0.18 280);
+    cursor: pointer;
+    border: 2px solid oklch(0.98 0.01 280);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .slider::-webkit-slider-thumb {
+    border: 2px solid oklch(0.12 0.03 280);
+  }
+
+  .dark .slider::-moz-range-thumb {
+    border: 2px solid oklch(0.12 0.03 280);
+  }
 }
