@@ -13,7 +13,9 @@ export function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return null;
+    return (
+      <div className="h-9 w-9 rounded-md border border-input bg-background" />
+    );
   }
 
   return (

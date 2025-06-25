@@ -48,27 +48,27 @@ const features = [
 
 export function FeatureGrid() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
       {features.map((feature, index) => {
         const IconComponent = feature.icon;
         return (
           <div
             key={index}
-            className="group relative bg-card rounded-xl border border-border p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            className="group relative bg-card rounded-xl border border-border p-4 sm:p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
           >
             {/* Background gradient on hover */}
             <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10"></div>
             
             {/* Icon */}
-            <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br ${feature.color} mb-4`}>
-              <IconComponent className="w-6 h-6 text-white" />
+            <div className={`inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br ${feature.color} mb-3 sm:mb-4`}>
+              <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
 
             {/* Content */}
-            <h4 className="text-xl font-semibold text-card-foreground mb-2">
+            <h4 className="text-lg sm:text-xl font-semibold text-card-foreground mb-2">
               {feature.title}
             </h4>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
               {feature.description}
             </p>
 

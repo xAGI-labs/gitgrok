@@ -106,7 +106,7 @@ export function RepositoryInput() {
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="https://github.com/owner/repository"
-                className="block w-full pl-10 pr-12 py-3 border border-input rounded-lg bg-background text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-ring focus:border-transparent transition-colors"
+                className="block w-full pl-8 sm:pl-10 pr-10 sm:pr-12 py-2.5 sm:py-3 text-sm sm:text-base border border-input rounded-lg bg-background text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-ring focus:border-transparent transition-colors"
                 disabled={isProcessing}
               />
               {isProcessing && (
@@ -122,11 +122,11 @@ export function RepositoryInput() {
               </div>
             )}
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <button
                 type="submit"
                 disabled={!url.trim() || isProcessing}
-                className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                className="flex-1 bg-primary text-primary-foreground px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg font-medium hover:bg-primary/90 focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
               >
                 {isProcessing ? (
                   <span className="flex items-center justify-center space-x-2">
@@ -141,7 +141,7 @@ export function RepositoryInput() {
               <button
                 type="button"
                 onClick={() => setShowAdvanced(!showAdvanced)}
-                className={`px-6 py-3 border border-border text-foreground rounded-lg font-medium hover:bg-accent hover:text-accent-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors ${
+                className={`px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base border border-border text-foreground rounded-lg font-medium hover:bg-accent hover:text-accent-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors ${
                   showAdvanced ? 'bg-accent text-accent-foreground' : ''
                 }`}
               >

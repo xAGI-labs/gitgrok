@@ -9,27 +9,27 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-background/80 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">GG</span>
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xs sm:text-sm">GG</span>
               </div>
-              <h1 className="text-2xl font-bold text-foreground">
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground">
                 GitGrok
               </h1>
               <span className="px-2 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
                 Beta
               </span>
             </div>
-            <nav className="flex items-center space-x-6">
-              <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
+            <nav className="flex items-center space-x-3 sm:space-x-6">
+              <a href="#features" className="hidden sm:block text-muted-foreground hover:text-foreground transition-colors">
                 Features
               </a>
-              <a href="#docs" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="#docs" className="hidden sm:block text-muted-foreground hover:text-foreground transition-colors">
                 Docs
               </a>
-              <a href="https://github.com" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://github.com" className="hidden sm:block text-muted-foreground hover:text-foreground transition-colors">
                 GitHub
               </a>
               <ThemeToggle />
@@ -39,19 +39,19 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-24 lg:py-34 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-bold text-foreground mb-6">
-            Transform any Git repository into
-            <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent"> AI-friendly text</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
+            <span className="animate-wave-colors">Transform any Git repository into</span>
+            <span className="animate-wave-colors-delayed"> AI-friendly text</span>
           </h2>
-          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
             GitGrok converts codebases into prompt-friendly digests for LLMs. 
             Zero friction, beautiful interface, powerful analysis.
           </p>
 
           {/* Repository Input Section */}
-          <div className="bg-card rounded-2xl shadow-xl border border-border p-8 mb-12">
+          <div className="bg-card rounded-2xl shadow-xl border border-border p-4 sm:p-6 lg:p-8 mb-8 sm:mb-12">
             <RepositoryInput />
           </div>
 
@@ -72,13 +72,13 @@ export default function Home() {
       </section>
 
       {/* Features Grid */}
-      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+      <section id="features" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-foreground mb-4">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 sm:mb-4">
               Why choose GitGrok?
             </h3>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
               Built for developers who need to feed codebases to AI models. 
               Faster, more beautiful, and more convenient than any alternative.
             </p>
@@ -88,21 +88,21 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-12 px-4 sm:px-6 lg:px-8">
+      <footer className="border-t border-border py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-3 mb-4 md:mb-0">
-              <div className="w-6 h-6 bg-gradient-to-br from-primary to-purple-600 rounded"></div>
-              <span className="text-muted-foreground">GitGrok</span>
+          <div className="flex flex-col sm:flex-row justify-between items-center">
+            <div className="flex items-center space-x-3 mb-4 sm:mb-0">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-primary to-purple-600 rounded"></div>
+              <span className="text-muted-foreground text-sm sm:text-base">GitGrok</span>
             </div>
-            <div className="flex items-center space-x-6">
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+            <div className="flex items-center space-x-4 sm:space-x-6">
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm sm:text-base">
                 Privacy
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm sm:text-base">
                 Terms
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm sm:text-base">
                 Support
               </a>
             </div>
