@@ -92,7 +92,7 @@ export function RepositoryInput() {
     <div className="space-y-6">
       <div className="space-y-4">
         <div>
-          <label htmlFor="repository-url" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="repository-url" className="block text-sm font-medium text-foreground mb-2">
             Repository URL
           </label>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -106,18 +106,18 @@ export function RepositoryInput() {
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="https://github.com/owner/repository"
-                className="block w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                className="block w-full pl-10 pr-12 py-3 border border-input rounded-lg bg-background text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-ring focus:border-transparent transition-colors"
                 disabled={isProcessing}
               />
               {isProcessing && (
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                  <ProcessingIcon className="w-5 h-5 animate-spin text-blue-500" />
+                  <ProcessingIcon className="w-5 h-5 animate-spin text-primary" />
                 </div>
               )}
             </div>
             
             {error && (
-              <div className="text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
+              <div className="text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-lg p-3">
                 {error}
               </div>
             )}
@@ -126,7 +126,7 @@ export function RepositoryInput() {
               <button
                 type="submit"
                 disabled={!url.trim() || isProcessing}
-                className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
               >
                 {isProcessing ? (
                   <span className="flex items-center justify-center space-x-2">
@@ -141,8 +141,8 @@ export function RepositoryInput() {
               <button
                 type="button"
                 onClick={() => setShowAdvanced(!showAdvanced)}
-                className={`px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-800 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors ${
-                  showAdvanced ? 'bg-gray-50 dark:bg-gray-800' : ''
+                className={`px-6 py-3 border border-border text-foreground rounded-lg font-medium hover:bg-accent hover:text-accent-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors ${
+                  showAdvanced ? 'bg-accent text-accent-foreground' : ''
                 }`}
               >
                 Advanced Options
@@ -152,16 +152,16 @@ export function RepositoryInput() {
         </div>
 
         {/* Quick Options */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-border">
           <div className="flex items-center space-x-2">
             <input
               type="checkbox"
               id="include-tests"
               checked={options.includeTests}
               onChange={(e) => setOptions(prev => ({ ...prev, includeTests: e.target.checked }))}
-              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              className="w-4 h-4 text-primary border-input rounded focus:ring-ring"
             />
-            <label htmlFor="include-tests" className="text-sm text-gray-600 dark:text-gray-400">
+            <label htmlFor="include-tests" className="text-sm text-muted-foreground">
               Include tests
             </label>
           </div>
@@ -172,9 +172,9 @@ export function RepositoryInput() {
               id="include-docs"
               checked={options.includeDocs}
               onChange={(e) => setOptions(prev => ({ ...prev, includeDocs: e.target.checked }))}
-              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              className="w-4 h-4 text-primary border-input rounded focus:ring-ring"
             />
-            <label htmlFor="include-docs" className="text-sm text-gray-600 dark:text-gray-400">
+            <label htmlFor="include-docs" className="text-sm text-muted-foreground">
               Include docs
             </label>
           </div>
@@ -185,9 +185,9 @@ export function RepositoryInput() {
               id="smart-filter"
               checked={options.smartFilter}
               onChange={(e) => setOptions(prev => ({ ...prev, smartFilter: e.target.checked }))}
-              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              className="w-4 h-4 text-primary border-input rounded focus:ring-ring"
             />
-            <label htmlFor="smart-filter" className="text-sm text-gray-600 dark:text-gray-400">
+            <label htmlFor="smart-filter" className="text-sm text-muted-foreground">
               Smart filtering
             </label>
           </div>

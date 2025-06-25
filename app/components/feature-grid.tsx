@@ -54,10 +54,10 @@ export function FeatureGrid() {
         return (
           <div
             key={index}
-            className="group relative bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            className="group relative bg-card rounded-xl border border-border p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
           >
             {/* Background gradient on hover */}
-            <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950"></div>
+            <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10"></div>
             
             {/* Icon */}
             <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br ${feature.color} mb-4`}>
@@ -65,10 +65,10 @@ export function FeatureGrid() {
             </div>
 
             {/* Content */}
-            <h4 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            <h4 className="text-xl font-semibold text-card-foreground mb-2">
               {feature.title}
             </h4>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed">
               {feature.description}
             </p>
 
