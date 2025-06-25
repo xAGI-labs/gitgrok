@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { GitHubIcon, GitLabIcon, ProcessingIcon } from './icons';
 import { AdvancedOptions } from './advanced-options';
 import { ResultDisplay } from './result-display';
@@ -34,11 +34,25 @@ interface ProcessResult {
   files?: any[];
 }
 
-export function RepositoryInput() {
-  const [url, setUrl] = useState('');
+interface RepositoryInputProps {
+  initialUrl?: string;
+  onUrlChange?: (url: string) => void;
+}
+
+export function RepositoryInput({ initialUrl = '', onUrlChange }: RepositoryInputProps = {}) {
+  const [url, setUrl] = useState(initialUrl);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState('');
   const [result, setResult] = useState<ProcessResult | null>(null);
+
+  useEffect(() => {
+    setUrl(initialUrl);
+  }, [initialUrl]);
+
+  const handleUrlChange = (newUrl: string) => {
+    setUrl(newUrl);
+    onUrlChange?.(newUrl);
+  };
   
   const [options, setOptions] = useState<ProcessOptions>({
     includeTests: true,
@@ -111,7 +125,7 @@ export function RepositoryInput() {
                 type="url"
                 id="repository-url"
                 value={url}
-                onChange={(e) => setUrl(e.target.value)}
+                onChange={(e) => handleUrlChange(e.target.value)}
                 placeholder="https://github.com/owner/repository"
                 className="block w-full pl-8 sm:pl-10 pr-10 sm:pr-12 py-2.5 sm:py-3 text-sm sm:text-base border border-input rounded-lg bg-background text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-ring focus:border-transparent transition-colors"
                 disabled={isProcessing}
