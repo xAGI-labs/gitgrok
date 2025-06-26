@@ -44,6 +44,7 @@ export function RepositoryInput({ initialUrl = '', onUrlChange }: RepositoryInpu
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState('');
   const [result, setResult] = useState<ProcessResult | null>(null);
+  const [showResultModal, setShowResultModal] = useState(false);
 
   useEffect(() => {
     setUrl(initialUrl);
@@ -90,6 +91,7 @@ export function RepositoryInput({ initialUrl = '', onUrlChange }: RepositoryInpu
 
       const result = await response.json();
       setResult(result);
+      setShowResultModal(true);
       
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -228,10 +230,22 @@ export function RepositoryInput({ initialUrl = '', onUrlChange }: RepositoryInpu
 
       </div>
 
-      {/* Results */}
-      {result && (
-        <ResultDisplay result={result} />
-      )}
+      {/* Results Modal */}
+      <Dialog open={showResultModal} onOpenChange={setShowResultModal}>
+        <DialogContent className="sm:max-w-[90vw] max-w-[95vw] max-h-[90vh] flex flex-col p-0">
+          <DialogHeader className="flex-shrink-0 px-6 py-4 border-b border-border">
+            <DialogTitle className="text-xl font-semibold">
+              Repository Digest Generated
+            </DialogTitle>
+            <DialogDescription>
+              {result?.repository && `Results for ${result.repository}`}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex-1 overflow-y-auto">
+            {result && <ResultDisplay result={result} />}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
