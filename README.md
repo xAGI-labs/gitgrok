@@ -181,9 +181,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 📧 Email: support@gitgrok.com
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/gitgrok/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/gitgrok/discussions)
+- 📧 Email: support@bugshoot.com
+- 🐛 Issues: [GitHub Issues](https://github.com/xAGI-labs/gitgrok/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/xAGI-labs/gitgrok/discussions)
 
 ## 🗺️ Roadmap
 
