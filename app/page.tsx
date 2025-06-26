@@ -4,7 +4,6 @@ import { useState } from "react";
 import { GitHubIcon, GitLabIcon, ProcessingIcon, DownloadIcon } from "./components/icons";
 import { RepositoryInput } from "./components/repository-input";
 import { OutputPreview } from "./components/output-preview";
-import { FeatureGrid } from "./components/feature-grid";
 import { ThemeToggle } from "../components/ui/theme-toggle";
 
 export default function Home() {
@@ -35,9 +34,6 @@ export default function Home() {
               </div>
             </div>
             <nav className="flex items-center space-x-3 sm:space-x-6">
-              <a href="#features" className="hidden sm:block text-muted-foreground hover:text-foreground transition-colors">
-                Features
-              </a>
               <a href="#docs" className="hidden sm:block text-muted-foreground hover:text-foreground transition-colors">
                 Docs
               </a>
@@ -94,49 +90,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Features Grid */}
-      <section id="features" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 sm:mb-4">
-              Why choose GitGrok?
-            </h3>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              Built for developers who need to feed codebases to AI models. 
-              Faster, more beautiful, and more convenient than any alternative.
-            </p>
-          </div>
-          <FeatureGrid />
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-border py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row justify-between items-center">
-            <div className="flex items-center space-x-3 mb-4 sm:mb-0">
-              <img 
-                src="/favicon.ico" 
-                alt="GitGrok Logo" 
-                className="w-6 h-6 sm:w-7 sm:h-7"
-              />
-              <span className="text-muted-foreground text-sm sm:text-base">GitGrok</span>
-            </div>
-            <div className="flex items-center space-x-4 sm:space-x-6">
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm sm:text-base">
-                Privacy
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm sm:text-base">
-                Terms
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm sm:text-base">
-                Support
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
