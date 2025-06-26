@@ -198,7 +198,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-  Made with ❤️ by the GitGrok team
+  Made with ❤️ by the <a href="https://bugshoot.com">Bugshoot</a> team
   
   ⭐ Star us on GitHub if you find GitGrok useful!
 </div>
