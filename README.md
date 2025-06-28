@@ -10,7 +10,7 @@
   [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC)](https://tailwindcss.com/)
   
-  [Demo](https://gitgrok.vercel.app) • [Report Bug](https://github.com/yourusername/gitgrok/issues) • [Request Feature](https://github.com/yourusername/gitgrok/issues)
+  [Demo](https://gitgrok.bugshoot.com/) • [Report Bug](https://github.com/xAGI-labs/gitgrok/issues) • [Request Feature](https://github.com/xAGI-labs/gitgrok/issues)
 </div>
 
 ## 🚀 About GitGrok
