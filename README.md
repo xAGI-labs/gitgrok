@@ -21,6 +21,7 @@ GitGrok is a powerful web application that converts entire Git repositories into
 
 - **🔥 Lightning Fast**: Process repositories in seconds with optimized parsing
 - **🔒 Privacy First**: Zero data retention, no accounts required, your code stays private
+- **🔐 Private Repository Support**: Access private repositories with GitHub Personal Access Token
 - **🤖 AI-Optimized**: Smart filtering and formatting designed for LLM consumption
 - **📄 Multi-Format Output**: Export as Markdown, JSON, or plain text
 - **🌐 Universal Support**: Works with GitHub, GitLab, Bitbucket, and any public Git repository
@@ -80,10 +81,21 @@ Create a `.env.local` file in the root directory:
 ## 🎯 Usage
 
 1. **Enter Repository URL**: Paste any public Git repository URL (GitHub, GitLab, Bitbucket)
-2. **Configure Options**: Use quick toggles or advanced options to customize processing
-3. **Generate Digest**: Click "Generate Digest" and wait for processing
-4. **View Results**: Results appear in a scrollable modal with tabs for Preview, Statistics, and Raw Output
-5. **Export**: Copy to clipboard or download as a file
+2. **Private Repository**: Check the "Private Repository" option if accessing a private repository
+3. **GitHub Token**: If private repository is selected, provide your GitHub Personal Access Token
+4. **Configure Options**: Use quick toggles or advanced options to customize processing
+5. **Generate Digest**: Click "Generate Digest" and wait for processing
+6. **View Results**: Results appear in a scrollable modal with tabs for Preview, Statistics, and Raw Output
+7. **Export**: Copy to clipboard or download as a file
+
+### Private Repository Access
+
+To access private repositories:
+
+1. Check the "Private Repository" option
+2. Provide a GitHub Personal Access Token (PAT) with appropriate permissions
+3. The token should have at least `repo` scope for private repositories
+4. [Learn how to create a PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
 ### Supported Repository Formats
 
@@ -187,7 +199,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🗺️ Roadmap
 
-- [ ] Private repository support with authentication
+- [x] Private repository support with authentication
 - [ ] CLI tool for command-line usage
 - [ ] Browser extension
 - [ ] API for programmatic access
