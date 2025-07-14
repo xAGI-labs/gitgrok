@@ -6,6 +6,7 @@ interface ProcessOptions {
   smartFilter: boolean;
   maxFileSize: number;
   outputFormat: 'markdown' | 'json' | 'text';
+  githubToken?: string;
 }
 
 interface AdvancedOptionsProps {
