@@ -11,6 +11,7 @@ interface ProcessOptions {
   smartFilter: boolean;
   maxFileSize: number;
   outputFormat: 'markdown' | 'json' | 'text';
+  githubToken?: string;
 }
 
 interface FileInfo {
@@ -34,8 +35,8 @@ export async function POST(request: NextRequest) {
     const git: SimpleGit = simpleGit();
 
     try {
-      // Clone repository
-      await git.clone(url, tempDir, ['--depth', '1']);
+      // Clone repository with authentication if provided
+      await cloneRepository(git, url, tempDir, options.githubToken);
       
       // Process files
       const files = await processRepository(tempDir, options);
@@ -63,6 +64,54 @@ export async function POST(request: NextRequest) {
       { error: error instanceof Error ? error.message : 'Processing failed' },
       { status: 500 }
     );
+  }
+}
+
+async function cloneRepository(git: SimpleGit, url: string, tempDir: string, githubToken?: string): Promise<void> {
+  try {
+    if (githubToken && url.includes('github.com')) {
+      const authenticatedUrl = url.replace('https://github.com/', `https://${githubToken}@github.com/`);
+      await git.clone(authenticatedUrl, tempDir, ['--depth', '1']);
+    } else {
+      await git.clone(url, tempDir, ['--depth', '1']);
+    }
+  } catch (error) {
+    console.error('Git clone error:', error);
+    
+    if (error instanceof Error) {
+      const errorMessage = error.message.toLowerCase();
+      
+      if (errorMessage.includes('authentication failed') || 
+          errorMessage.includes('invalid username or password') ||
+          errorMessage.includes('bad credentials') ||
+          errorMessage.includes('access denied')) {
+        throw new Error('Authentication failed. Please check your GitHub Personal Access Token and ensure it has the necessary permissions.');
+      }
+      
+      if (errorMessage.includes('repository not found') || 
+          errorMessage.includes('not found') ||
+          errorMessage.includes('could not read from remote repository')) {
+        if (githubToken) {
+          throw new Error('Repository not found or access denied. Please verify the repository URL and ensure your GitHub Personal Access Token has access to this repository.');
+        } else {
+          throw new Error('Repository not found. This may be a private repository - please check the "Private Repository" option and provide a GitHub Personal Access Token.');
+        }
+      }
+      
+      if (errorMessage.includes('403') || errorMessage.includes('forbidden')) {
+        if (githubToken) {
+          throw new Error('Access forbidden. Your GitHub Personal Access Token may not have the necessary permissions for this repository.');
+        } else {
+          throw new Error('Access forbidden. This appears to be a private repository - please check the "Private Repository" option and provide a GitHub Personal Access Token.');
+        }
+      }
+      
+      if (errorMessage.includes('401') || errorMessage.includes('unauthorized')) {
+        throw new Error('Unauthorized access. Please check your GitHub Personal Access Token.');
+      }
+    }
+    
+    throw error;
   }
 }
 
