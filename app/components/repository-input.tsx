@@ -19,6 +19,7 @@ interface ProcessOptions {
   smartFilter: boolean;
   maxFileSize: number;
   outputFormat: 'markdown' | 'json' | 'text';
+  githubToken?: string;
 }
 
 interface ProcessResult {
@@ -45,6 +46,7 @@ export function RepositoryInput({ initialUrl = '', onUrlChange }: RepositoryInpu
   const [error, setError] = useState('');
   const [result, setResult] = useState<ProcessResult | null>(null);
   const [showResultModal, setShowResultModal] = useState(false);
+  const [isPrivateRepo, setIsPrivateRepo] = useState(false);
 
   useEffect(() => {
     setUrl(initialUrl);
@@ -60,7 +62,8 @@ export function RepositoryInput({ initialUrl = '', onUrlChange }: RepositoryInpu
     includeDocs: true,
     smartFilter: true,
     maxFileSize: 51200, // 50KB
-    outputFormat: 'markdown'
+    outputFormat: 'markdown',
+    githubToken: ''
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -74,6 +77,11 @@ export function RepositoryInput({ initialUrl = '', onUrlChange }: RepositoryInpu
     try {
       if (!isValidGitUrl(url)) {
         throw new Error('Please enter a valid Git repository URL');
+      }
+
+      // Validate that PAT is provided for private repositories
+      if (isPrivateRepo && (!options.githubToken || options.githubToken.trim() === '')) {
+        throw new Error('Please provide a GitHub Personal Access Token for private repositories');
       }
 
       const response = await fetch('/api/process-repo', {
@@ -94,7 +102,19 @@ export function RepositoryInput({ initialUrl = '', onUrlChange }: RepositoryInpu
       setShowResultModal(true);
       
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      let errorMessage = 'An error occurred';
+      
+      if (err instanceof Error) {
+        errorMessage = err.message;
+        
+        // Don't override specific error messages from the API
+        // Only provide general guidance for generic errors
+        if (err.message === 'An error occurred' || err.message === 'Processing failed') {
+          errorMessage = 'Failed to process repository. Please check the URL and try again.';
+        }
+      }
+      
+      setError(errorMessage);
     } finally {
       setIsProcessing(false);
     }
@@ -138,6 +158,53 @@ export function RepositoryInput({ initialUrl = '', onUrlChange }: RepositoryInpu
                 </div>
               )}
             </div>
+            
+            {/* Private Repository Toggle */}
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="private-repo"
+                checked={isPrivateRepo}
+                onChange={(e) => {
+                  setIsPrivateRepo(e.target.checked);
+                  if (!e.target.checked) {
+                    setOptions(prev => ({ ...prev, githubToken: '' }));
+                  }
+                }}
+                className="w-4 h-4 text-primary border-input rounded focus:ring-ring"
+                disabled={isProcessing}
+              />
+              <label htmlFor="private-repo" className="text-sm font-medium text-foreground">
+                Private Repository
+              </label>
+            </div>
+            
+            {isPrivateRepo && (
+              <div className="space-y-2">
+                <label htmlFor="github-token" className="block text-sm font-medium text-foreground">
+                  GitHub Personal Access Token
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg className="w-5 h-5 text-muted-foreground" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <input
+                    type="password"
+                    id="github-token"
+                    value={options.githubToken || ''}
+                    onChange={(e) => setOptions(prev => ({ ...prev, githubToken: e.target.value }))}
+                    placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                    className="block w-full pl-8 sm:pl-10 pr-3 py-2.5 sm:py-3 text-sm sm:text-base border border-input rounded-lg bg-background text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-ring focus:border-transparent transition-colors"
+                    disabled={isProcessing}
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Required for private repositories. <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Learn how to create a PAT</a>
+                </p>
+              </div>
+            )}
             
             {error && (
               <div className="text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-lg p-3">
